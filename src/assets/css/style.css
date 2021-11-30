@@ -1,0 +1,57 @@
+/************ GENRAL SETTINGS ************/
+
+:root{
+    --color1: #004ce5;
+    --color2: #4a80ee;
+    --color3:#003297;
+    --color4: #cecece;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    padding:0;
+    margin:0;
+}
+
+.btn-primary{
+    background-color: var(--color1);
+    border-color: var(--color1);
+}
+
+.btn-primary:hover{
+    background-color: var(--color2);
+    border-color: var(--color2);
+}
+
+
+
+
+
+/************ TOPBAR ************/
+.topbar{
+    background-color: var(--color4);
+    padding:0.5rem;
+}
+
+.topbar ul{
+    list-style-type: none;
+    display:flex;
+    margin:0;
+    padding:0;
+    justify-content: flex-end;
+}
+
+.topbar ul li{
+    padding-left: 1rem;
+}
+
+
+/************ MENUBAR ************/
+
+.menubar .navbar-nav a.active{
+    border-bottom: 0.3rem solid var(--color2);
+}
+
+.menubar .navbar-nav a:hover{
+    color: var(--color2) !important;
+}
