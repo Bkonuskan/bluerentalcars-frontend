@@ -14,21 +14,21 @@ const TopBar = () => {
     <div className="topbar">
       <Container>
         <Row>
-          <Col>
-            <FiPhoneCall size={16} /> CALL US +1 235 98 95
+          <Col xs={7}>
+            <FiPhoneCall size={16} /> <span className="d-none d-md-inline">CALL US</span> +1 235 98 95
           </Col>
-          <Col>
+          <Col xs={5}>
             <ul>
-              <li>
+              <li className="d-none d-md-block">
                 <FiYoutube />
               </li>
-              <li>
+              <li className="d-none d-md-block">
                 <FiFacebook />
               </li>
-              <li>
+              <li className="d-none d-md-block">
                 <FiTwitter />
               </li>
-              <li>
+              <li className="d-none d-md-block">
                 <FiInstagram />
               </li>
               <li>
