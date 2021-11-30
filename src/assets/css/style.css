@@ -73,9 +73,10 @@ body{
 .slider .carousel-control-prev{
     top:auto;
     bottom:15px;
+    width:auto;
 }
 
 .slider .carousel-control-prev{
-    right:25px;
+    right:50px;
     left:auto;
 }
