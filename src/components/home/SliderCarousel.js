@@ -14,7 +14,7 @@ const SliderCarousel = () => {
           />
           <Carousel.Caption>
             <h3>{slider.title}</h3>
-            <p>{slider.description}</p>
+            <p className="d-none d-lg-block">{slider.description}</p>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

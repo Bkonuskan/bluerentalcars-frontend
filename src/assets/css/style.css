@@ -5,6 +5,7 @@
     --color2: #4a80ee;
     --color3:#003297;
     --color4: #cecece;
+    --color5: #363636;
     --color1-transparent-15: rgba(0, 76, 229, 0.15);
 }
 
@@ -24,6 +25,28 @@ body{
     border-color: var(--color2);
 }
 
+
+/************ SECTION TITLE ************/
+.section-title{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.section-title h2{
+    font-weight: 900;
+    color: var(--color5);
+}
+
+.section-title span{
+    display: inline-block;
+    width: 5rem;
+    height: 0.5rem;
+    background-color: var(--color2);
+}
 
 
 
@@ -48,6 +71,18 @@ body{
 
 
 /************ MENUBAR ************/
+.menubar .navbar-nav{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 450px) {
+    .menubar .navbar-nav{
+        flex-direction: column;
+    }
+}
+
 
 .menubar .navbar-nav a.active{
     border-bottom: 0.3rem solid var(--color2);
@@ -79,4 +114,31 @@ body{
 .slider .carousel-control-prev{
     right:50px;
     left:auto;
+}
+
+.slider form{
+    background-color: white;
+    padding:2rem;
+    border-radius: 0.2rem;
+}
+
+.slider .input-group-text{
+    font-size: 0.8rem;
+}
+
+.slider .row{
+    align-items: center;
+}
+
+
+/************ CUSTOMER SERVICE CARD ************/
+
+.customer-service-card .icon{
+    color:var(--color2);
+    font-size: 4rem;
+}
+
+.customer-service-card .row{
+    align-items: center;
+    text-align: center;
 }
