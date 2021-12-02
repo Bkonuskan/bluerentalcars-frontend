@@ -14,7 +14,7 @@ export const vehicleList = [
   },
   {
     id: 2,
-    model: "Ford Fiesta",
+    model: "Ford Fiesta Manuel",
     doors: 4,
     seats: 5,
     luggage: 300,
@@ -27,7 +27,7 @@ export const vehicleList = [
   },
   {
     id: 3,
-    model: "Ford Fiesta",
+    model: "Ford Fiesta Automatic",
     doors: 4,
     seats: 5,
     luggage: 300,
