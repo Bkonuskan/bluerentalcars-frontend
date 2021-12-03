@@ -203,6 +203,47 @@ body{
 
 }
 
+/************ NEWSLETTER ************/
+.newsletter{
+    background-color: var(--color4);
+    padding: 4rem;
+}
+
+.newsletter .row{
+    justify-content: center;
+    align-items: center;
+}
+
+
+/************ PAGE HEADER ************/
+
+.page-header{
+   padding: 2rem;
+   text-align: center;
+   position: relative;
+}
+
+.page-header::after{
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    background-image: url(../img/page-header-bg.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 1;
+ }
+
+
+.page-header .header-content{
+   position: relative;
+   z-index: 2;
+}
+
 
 /************ FOOTER ************/
 footer{
@@ -220,9 +261,17 @@ footer ul{
     margin-bottom: 1rem;
 }
 
-footer ul li{
+footer ul li a{
+    color:var(--color4);
+    text-decoration: none;
     margin-left:2rem;
     border-bottom: 3px solid var(--color2);
+}
+
+footer ul li a:hover{
+    color:var(--color5);
+    border-bottom: 3px solid var(--color5);
+
 }
 
 footer ul li:first-child{

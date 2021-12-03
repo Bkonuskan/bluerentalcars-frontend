@@ -1,13 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
         <footer>
+            
             <ul>
-                <li>Home</li>
-                <li>Services</li>
-                <li>About Us</li>
-                <li>Contact</li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/services">Services</Link></li>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
             </ul>
             <div>&copy;2021 - Copyright by Blue Rental Cars Inc.</div>
         </footer>

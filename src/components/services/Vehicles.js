@@ -132,7 +132,7 @@ const Vehicles = () => {
               <tr>
                 <td>Age</td>
                 <td>{vehicles[activeVehicle].age}</td>
-              </tr>
+              </tr> 
             </tbody>
           </Table>
         </Col>

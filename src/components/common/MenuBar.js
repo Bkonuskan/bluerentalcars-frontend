@@ -7,27 +7,28 @@ import {
   RiInformationLine,
   RiHeadphoneLine,
 } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const MenuBar = () => {
   return (
     <Navbar expand="md" className="menubar">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={Link} to="/">
           <Image src={logo} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home">
+            <Nav.Link  as={Link} to="/">
               <RiHome5Line /> Home
             </Nav.Link>
-            <Nav.Link href="#link1">
+            <Nav.Link  as={Link} to="/services">
               <RiShape2Fill /> Services
             </Nav.Link>
-            <Nav.Link href="#link2">
+            <Nav.Link  as={Link} to="/about">
               <RiInformationLine /> About Us
             </Nav.Link>
-            <Nav.Link href="#link3">
+            <Nav.Link  as={Link} to="/contact">
               <RiHeadphoneLine /> Contact
             </Nav.Link>
           </Nav>
