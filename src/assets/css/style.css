@@ -218,7 +218,7 @@ body{
 /************ PAGE HEADER ************/
 
 .page-header{
-   padding: 2rem;
+   padding: 4rem;
    text-align: center;
    position: relative;
 }
@@ -238,12 +238,31 @@ body{
     z-index: 1;
  }
 
+ .page-header::before{
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    background-color: var(--color1-transparent-15);
+    z-index: 2;
+ }
+
 
 .page-header .header-content{
-   position: relative;
-   z-index: 2;
+   position: absolute;
+   top:50%;
+   left:50%;
+   transform: translate(-50%, -50%);
+   z-index: 3;
 }
 
+.page-header .breadcrumb a{
+    text-decoration: none;
+}
+
+ 
 
 /************ FOOTER ************/
 footer{
