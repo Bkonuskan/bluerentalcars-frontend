@@ -8,6 +8,7 @@ import {
   FiUser,
   FiYoutube,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const TopBar = () => {
   return (
@@ -32,7 +33,7 @@ const TopBar = () => {
                 <FiInstagram />
               </li>
               <li>
-                <Button size="sm">
+                <Button as={Link} size="sm" to="/login">
                   <FiUser /> Login
                 </Button>
               </li>
