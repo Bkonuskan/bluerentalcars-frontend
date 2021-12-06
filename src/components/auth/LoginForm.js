@@ -11,6 +11,8 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { login } from "../../api/user-service";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,20 @@ const LoginForm = () => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    setLoading(true);
+    
+    login(values).then(resp=>{
+      localStorage.setItem("token", resp.data.token);
+
+      setLoading(false);
+
+
+    })
+    .catch(err=>{
+      toast(err.response.data.message);
+      setLoading(false);
+    })
+
   };
 
   const formik = useFormik({
