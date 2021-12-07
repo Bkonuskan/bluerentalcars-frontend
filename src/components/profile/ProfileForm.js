@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { Form,Button, Spinner } from "react-bootstrap";
 import MaskInput from "react-maskinput/lib";
+import { updateUser } from "../../api/user-service";
 
 const ProfileForm = ({ user }) => {
   const [loading, setLoading] = useState(false);
-  console.log(user);
 
-  const initialValues =
+  const initialValues = user;
+
+  /*
     Object.keys(user).length > 0
       ? user
       : {
@@ -19,9 +21,8 @@ const ProfileForm = ({ user }) => {
           email: "",
           address: "",
           zipCode: "",
-          username: "",
         };
-
+*/
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
@@ -32,7 +33,21 @@ const ProfileForm = ({ user }) => {
   });
 
   const onSubmit = (values) => {
-    
+    console.log(values);
+
+    delete values["roles"];
+
+    setLoading(true);
+    updateUser(values).then(resp=>{
+      toast("Your profile updated successfully");
+      setLoading(false);
+    })
+    .catch(err=>{
+      toast("An error occured. Please try later.");
+      console.log(err.response.data.message);
+      setLoading(false);
+    })
+
   };
 
   const formik = useFormik({

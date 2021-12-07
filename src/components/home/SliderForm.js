@@ -4,8 +4,14 @@ import { FiCalendar, FiMapPin } from "react-icons/fi";
 import { vehicleList } from "../../data/vehicleList";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import CompleteReservationModal from "./CompleteReservationModal";
+import {useStore} from "../../store";
+import {setReservationState} from "../../store/reservation/reservationActions";
 
 const SliderForm = () => {
+  const { dispatchReservation  } = useStore();
+  const [modalShow, setModalShow] = React.useState(false);
+
   const initialValues = {
     car: "",
     pickUpPlace: "",
@@ -28,6 +34,12 @@ const SliderForm = () => {
 
   const onSubmit = (values) => {
     console.log(values);
+
+    // Aracın belirtilen tarih aralığında müsait olup olmadığı kontrol edilmeli
+
+    dispatchReservation(setReservationState(values));
+
+    setModalShow(true);
   };
 
   const formik = useFormik({
@@ -120,6 +132,12 @@ const SliderForm = () => {
       <Button size="lg" className="w-100" type="submit">
         CONTINUE RESERVATION
       </Button>
+
+      <CompleteReservationModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+
     </Form>
   );
 };

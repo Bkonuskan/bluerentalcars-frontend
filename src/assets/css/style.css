@@ -296,3 +296,15 @@ footer ul li a:hover{
 footer ul li:first-child{
     margin-left:0;
 }
+
+
+/************ ALERTIFY ************/
+
+.alertify .ajs-header{
+    background-color: var(--color2);
+    font-weight: 600;
+}
+
+.alertify .ajs-commands button.ajs-close{
+    background-color: white;
+}

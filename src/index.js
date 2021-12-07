@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import "alertifyjs/build/css/alertify.min.css";
 
 import "./assets/css/style.css";
 import { StoreProvider } from './store';
