@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, InputGroup, FormControl, Button } from "react-bootstrap";
 import { FiCalendar, FiMapPin } from "react-icons/fi";
-import { vehicleList } from "../../data/vehicleList";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CompleteReservationModal from "./CompleteReservationModal";
@@ -9,7 +8,8 @@ import {useStore} from "../../store";
 import {setReservationState} from "../../store/reservation/reservationActions";
 
 const SliderForm = () => {
-  const { dispatchReservation  } = useStore();
+  const { dispatchReservation, vehiclesState  } = useStore();
+  const { vehicles } = vehiclesState;
   const [modalShow, setModalShow] = React.useState(false);
 
   const initialValues = {
@@ -57,7 +57,7 @@ const SliderForm = () => {
         isInvalid={!!formik.errors.car}
       >
         <option>Select a car</option>
-        {vehicleList.map((vehicle) => (
+        {vehicles.map((vehicle) => (
           <option value={vehicle.id} key={vehicle.id}>
             {vehicle.model}
           </option>
