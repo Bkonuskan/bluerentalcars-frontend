@@ -9,11 +9,16 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { FiCheck, FiChevronDown, FiChevronUp, FiX } from "react-icons/fi";
+import { useStore } from "../../store";
 import SectionTitle from "../common/SectionTitle";
-import { vehicleList } from "../../data/vehicleList";
+
 
 const Vehicles = () => {
-  const [vehicles, setVehicles] = useState(vehicleList);
+  const { vehiclesState } = useStore();
+  const { vehicles } = vehiclesState;
+
+  console.log(vehicles);
+  
   const [activeVehicle, setActiveVehicle] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const vehiclesLength = 5;
@@ -24,7 +29,9 @@ const Vehicles = () => {
   };
 
   return (
+     
     <Container>
+
       <SectionTitle title="Vehicles" />
       <Row>
         <Col lg={3}>
@@ -138,6 +145,7 @@ const Vehicles = () => {
         </Col>
       </Row>
     </Container>
+    
   );
 };
 

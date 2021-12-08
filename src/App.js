@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { getUser } from "./api/user-service";
@@ -12,9 +12,11 @@ import { loginSuccess } from "./store/user/userActions";
 import { setVehiclesInStore } from "./store/vehicles/vehiclesActions";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const { dispatchUser, dispatchVehicles } = useStore();
 
   const loadData = async () => {
+ 
     try {
       /**** LOAD USER ****/
       const respUser = await getUser();
@@ -25,6 +27,7 @@ const App = () => {
       const respVehicles = await getVehicles();
       if(respVehicles.status !==200) throw "An error occured whlie getting vehicles";
       dispatchVehicles(setVehiclesInStore(respVehicles.data));
+      setLoading(false);
 
     } catch (error) {
       console.log(error);
@@ -35,6 +38,8 @@ const App = () => {
     loadData();
   }, []);
 
+  if(loading) return(<div>App loading...</div>)
+  else
   return (
     <BrowserRouter>
       <TopBar />
@@ -43,7 +48,7 @@ const App = () => {
       <Footer />
       <ToastContainer />
     </BrowserRouter>
-  );
+  )
 };
 
 export default App;
