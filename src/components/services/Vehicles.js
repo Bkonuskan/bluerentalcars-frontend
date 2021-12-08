@@ -88,8 +88,8 @@ const Vehicles = () => {
         </Col>
         <Col lg={6}>
           <Image
-            src={`/assets/img/cars/${vehicles[activeVehicle].image}`}
-            className="img-fluid"
+          src={`${process.env.REACT_APP_API_URL}files/display/${vehicles[activeVehicle].image[0]}`}
+          className="img-fluid"
           />
         </Col>
         <Col lg={3}>
@@ -97,7 +97,7 @@ const Vehicles = () => {
             <thead>
               <tr>
                 <th colSpan={2}>
-                  <h3>${vehicles[activeVehicle].pricePerDay} per day</h3>
+                  <h3>${vehicles[activeVehicle].pricePerHour} per hour</h3>
                 </th>
               </tr>
             </thead>
