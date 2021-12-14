@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { Form,Button, Spinner } from "react-bootstrap";
+import { Form,Button, Spinner, Alert } from "react-bootstrap";
 import MaskInput from "react-maskinput/lib";
 import { updateUser } from "../../api/user-service";
 
@@ -138,10 +138,12 @@ const ProfileForm = ({ user }) => {
           {formik.errors.zipCode}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button type="submit" disabled={loading}>
+      <Button type="submit" disabled={user.builtIn || loading}>
         {loading && <Spinner animation="border" variant="light" size="sm" />}{" "}
         Save
       </Button>
+
+      {user.builtIn && <Alert variant="warning" className="mt-3">Built-in accounts can not be updated or deleted.</Alert>}
     </Form>
   );
 };

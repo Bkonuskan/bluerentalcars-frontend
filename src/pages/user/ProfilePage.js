@@ -3,8 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import PageHeader from "../../components/common/PageHeader";
 import Spacer from "../../components/common/Spacer";
-import PasswordForm from "../../components/profile/PasswordForm";
-import ProfileForm from "../../components/profile/ProfileForm";
+import PasswordForm from "../../components/user/PasswordForm";
+import ProfileForm from "../../components/user/ProfileForm";
 import { useStore } from "../../store";
 
 const ProfilePage = () => {
@@ -35,7 +35,7 @@ const ProfilePage = () => {
           <Col md={4} className="mt-5 mt-md-0">
             <h3>Update Password</h3>
 
-            <PasswordForm />
+            <PasswordForm  user={user}/>
           </Col>
         </Row>
       </Container>

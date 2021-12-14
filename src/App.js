@@ -19,19 +19,24 @@ const App = () => {
   const loadData = async () => {
  
     try {
-      /**** LOAD USER ****/
-      const respUser = await getUser();
-      if (respUser.status !== 200) throw "An error occured whlie getting user";
-      dispatchUser(loginSuccess(respUser.data));
 
       /**** LOAD VEHICLES ****/
       const respVehicles = await getVehicles();
       if(respVehicles.status !==200) throw "An error occured whlie getting vehicles";
       dispatchVehicles(setVehiclesInStore(respVehicles.data));
+      
+
+
+      /**** LOAD USER ****/
+      const respUser = await getUser();
+      if (respUser.status !== 200) throw "An error occured whlie getting user";
+      dispatchUser(loginSuccess(respUser.data));
+
       setLoading(false);
 
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 

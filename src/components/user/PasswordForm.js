@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { updatePassword } from "../../api/user-service";
 
-const PasswordForm = () => {
+const PasswordForm = ({user}) => {
   const [loading, setLoading] = useState(false);
   
   const initialValues = {
@@ -79,7 +79,7 @@ const PasswordForm = () => {
           {formik.errors.confirmPassword}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button type="submit" disabled={loading}>
+      <Button type="submit" disabled={user.builtIn || loading}>
         {loading && <Spinner animation="border" variant="light" size="sm" />}{" "}
         Update Password
       </Button>

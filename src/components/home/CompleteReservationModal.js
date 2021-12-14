@@ -9,6 +9,7 @@ import {
   Card,
   Form,
   Spinner,
+  Alert,
 } from "react-bootstrap";
 import { FaRegAddressCard } from "react-icons/fa";
 import { FiCalendar, FiMapPin, FiPhoneCall } from "react-icons/fi";
@@ -27,7 +28,7 @@ const CompleteReservationModal = (props) => {
   const { vehicles } = vehiclesState;
   const { reservation } = reservationState;
   const { user } = userState;
-  const { onHide } = props;
+  const { onHide, onReset } = props;
 
   const vehicleImageId =
     reservation &&
@@ -59,19 +60,25 @@ const CompleteReservationModal = (props) => {
       car: reservation.car,
       pickUpLocation: reservation.pickUpLocation,
       dropOfLocation: reservation.dropOfLocation,
-      pickUpTime: moment(`${reservation.pickUpDate} ${reservation.pickUpTime}`).format("MM/DD/YYYY hh:mm:ss"),
-      dropOfTime: moment(`${reservation.dropOffDate} ${reservation.dropOffTime}`).format("MM/DD/YYYY hh:mm:ss"),
-  } 
+      pickUpTime: moment(
+        `${reservation.pickUpDate} ${reservation.pickUpTime}`
+      ).format("MM/DD/YYYY hh:mm:ss"),
+      dropOfTime: moment(
+        `${reservation.dropOffDate} ${reservation.dropOffTime}`
+      ).format("MM/DD/YYYY hh:mm:ss"),
+    };
 
-    createReservation(reservationDto).then(resp=> {
-      setLoading(false);
-      toast("Reservation created successfully");
-    })
-    .catch(err=>{
-      setLoading(false);
-      toast("An error occured, please try later");
-    })
-
+    createReservation(reservationDto)
+      .then((resp) => {
+        setLoading(false);
+        toast("Reservation created successfully");
+        onHide();
+        onReset();
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast("An error occured, please try later");
+      });
   };
 
   const formik = useFormik({
@@ -163,6 +170,10 @@ const CompleteReservationModal = (props) => {
 
                 <Card>
                   <Card.Body>
+                    <Alert variant="warning">
+                      Total price: ${reservation.totalPrice}
+                    </Alert>
+
                     <Form.Group className="mb-3">
                       <Form.Label>Card number</Form.Label>
                       <Form.Control
