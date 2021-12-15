@@ -10,11 +10,13 @@ import {
   Button,
 } from "react-bootstrap";
 import { FiCheck, FiCrosshair, FiArrowLeft, FiX } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { getReservation } from "../../api/reservation-service";
 
 const Details = ({ reservationId }) => {
   const [loading, setLoading] = useState(true);
   const [reservation, setReservation] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     getReservation(reservationId).then((resp) => {
@@ -53,7 +55,7 @@ const Details = ({ reservationId }) => {
                         <td>{reservation.pickUpLocation}</td>
                       </tr>
                       <tr>
-                        <td>Frop off location</td>
+                        <td>Drop off location</td>
                         <td>{reservation.dropOfLocation}</td>
                       </tr>
                       <tr>
@@ -122,7 +124,7 @@ const Details = ({ reservationId }) => {
             </Accordion>
           </Col>
           <Col lg={2}>
-            <Button variant="secondary" className="w-100 mt-3">
+            <Button variant="secondary"  className="w-100 mt-3" onClick={()=> navigate(-1)}>
               <FiArrowLeft /> Back to reservations
             </Button>
           </Col>
