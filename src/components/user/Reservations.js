@@ -8,6 +8,13 @@ import { getReservations } from "../../api/reservation-service";
 const Reservations = () => {
   const [loading, setLoading] = useState(true);
   const [reservations, setReservations] = useState([]);
+  const navigate = useNavigate();
+
+  const showDetails = (id) => {
+    navigate(`/reservations/${id}`);
+  }
+  
+
 
   useEffect(() => {
     getReservations().then(resp=>{
@@ -36,7 +43,7 @@ const Reservations = () => {
           </tr>
         )}
         {reservations.map((item, index) => (
-          <tr key={index}>
+          <tr key={index} onClick={()=>showDetails(item.id)} style={{cursor:"pointer"}}>
             <td>{index + 1}</td>
             <td>{item.car.model}</td>
             <td>{item.pickUpLocation}<br/>{moment(item.pickUpTime).format("lll")}</td>
