@@ -11,7 +11,11 @@ import {
   ButtonGroup,
   Alert,
 } from "react-bootstrap";
-import { deleteUser, getUser, getUserById, updateUser } from "../../api/admin-user-service";
+import {
+  deleteUser,
+  getUserById,
+  updateUser,
+} from "../../api/admin-user-service";
 import MaskInput from "react-maskinput/lib";
 import alertify from "alertifyjs";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,7 +34,8 @@ const UserEdit = () => {
     builtIn: false,
   });
 
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { userId } = useParams();
   const navigate = useNavigate();
 
@@ -45,10 +50,18 @@ const UserEdit = () => {
   });
 
   const onSubmit = (values) => {
-    setLoading(true);
+    setSaving(true);
 
-    
-
+    updateUser(userId, values)
+      .then((resp) => {
+        setSaving(false);
+        toast("User was updated successfully");
+      })
+      .catch((err) => {
+        toast("An error occured. Please try again later.");
+        setSaving(false);
+        console.log(err.response.data.message);
+      });
   };
 
   const formik = useFormik({
@@ -58,19 +71,41 @@ const UserEdit = () => {
     onSubmit,
   });
 
-  const handleDelete = () => {};
-
-  useEffect(() => {
-    setLoading(true);
+  const handleDelete = () => {
     //userId nin boş olmadığı veya numeric olduğu kontrol edilse iyi olur.
 
-    getUserById(userId).then(resp=>{
+    alertify.confirm(
+      "Delete",
+      "Are you sure want to delete?",
+      () => {
+
+        setDeleting(true);
+        deleteUser(userId)
+          .then((resp) => {
+            setDeleting(false);
+            toast("User was deleted uccessfully");
+            navigate(-1);
+          })
+          .catch((err) => {
+            setDeleting(false);
+            toast("An error occured. Please try later");
+            console.log(err.response.data.message);
+          });
+      },
+      () => {
+        console.log("canceled");
+      }
+    );
+  };
+
+  useEffect(() => {
+    //userId nin boş olmadığı veya numeric olduğu kontrol edilse iyi olur.
+
+    getUserById(userId).then((resp) => {
+      console.log(resp.data);
       setInitialValues(resp.data);
-      setLoading(false);
-    })
-
-  }, [])
-
+    });
+  }, []);
 
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
@@ -214,16 +249,19 @@ const UserEdit = () => {
           </Button>
           {!initialValues.builtIn && (
             <>
-              <Button variant="primary" type="submit" disabled={loading}>
+              <Button variant="primary" type="submit" disabled={saving}>
+                {saving && (
+                  <Spinner animation="border" variant="light" size="sm" />
+                )}{" "}
                 Save
               </Button>
               <Button
                 type="button"
                 variant="danger"
-                disabled={loading}
+                disabled={deleting}
                 onClick={handleDelete}
               >
-                {loading && (
+                {deleting && (
                   <Spinner animation="border" variant="light" size="sm" />
                 )}{" "}
                 Delete

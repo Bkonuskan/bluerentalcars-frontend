@@ -21,8 +21,14 @@ const createUser = (user) => {
   });
 };
 
-const updateUser = (user) => {
-  return axios.put(`${API_URL}user/${user.id}/auth`, user, {
+const updateUser = (userId, user) => {
+  return axios.put(`${API_URL}user/${userId}/auth`, user, {
+    headers: authHeader(),
+  });
+};
+
+const deleteUser = (userId) => {
+  return axios.delete(`${API_URL}user/${userId}/auth`, {
     headers: authHeader(),
   });
 };
@@ -38,4 +44,4 @@ const downloadUsers = () => {
   });
 };
 
-export { getUsers, createUser, downloadUsers, getUserById, updateUser };
+export { getUsers, createUser, downloadUsers, getUserById, updateUser, deleteUser };
