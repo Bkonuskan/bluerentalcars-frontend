@@ -9,8 +9,20 @@ const getUsers = () => {
   });
 };
 
+const getUserById = (userId) => {
+  return axios.get(`${API_URL}user/${userId}/auth`, {
+    headers: authHeader(),
+  });
+};
+
 const createUser = (user) => {
   return axios.post(`${API_URL}add`, user, {
+    headers: authHeader(),
+  });
+};
+
+const updateUser = (user) => {
+  return axios.put(`${API_URL}user/${user.id}/auth`, user, {
     headers: authHeader(),
   });
 };
@@ -22,8 +34,8 @@ const downloadUsers = () => {
       "Content-Type":
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     },
-    responseType: "arraybuffer"
+    responseType: "arraybuffer",
   });
 };
 
-export { getUsers, createUser, downloadUsers };
+export { getUsers, createUser, downloadUsers, getUserById, updateUser };
