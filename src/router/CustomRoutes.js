@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AboutPage from "../pages/AboutPage";
+import UserEditPage from "../pages/admin/UserEditPage";
 import UsersNewPage from "../pages/admin/UsersNewPage";
 import UsersPage from "../pages/admin/UsersPage";
 import ContactPage from "../pages/ContactPage";
@@ -20,6 +21,7 @@ const CustomRoutes = () => {
       {/* ADMIN ROUTES */}
       <Route path="/admin/users" element={<PrivateRoute admin={true}><UsersPage/></PrivateRoute>}/>
       <Route path="/admin/users/new" element={<PrivateRoute admin={true}><UsersNewPage/></PrivateRoute>}/>
+      <Route path="/admin/users/:userId" element={<PrivateRoute admin={true}><UserEditPage/></PrivateRoute>}/>
 
       {/* CUSTOMER ROUTES */}
       <Route path="/reservations/:reservationId" element={<PrivateRoute><UserReservationDetailPage/></PrivateRoute>}/>

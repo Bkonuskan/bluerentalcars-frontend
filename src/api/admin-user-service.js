@@ -15,4 +15,15 @@ const createUser = (user) => {
   });
 };
 
-export { getUsers, createUser };
+const downloadUsers = () => {
+  return axios.get(`${API_URL}excel/download/users`, {
+    headers: {
+      ...authHeader(),
+      "Content-Type":
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    },
+    responseType: "arraybuffer"
+  });
+};
+
+export { getUsers, createUser, downloadUsers };

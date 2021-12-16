@@ -22,8 +22,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const initialValues = {
-    email: "joann@gmail.com",
-    password: "123456",
+    email: "admin@bluerentalcars.com",
+    password: "12345",
   };
 
   const validationSchema = Yup.object({

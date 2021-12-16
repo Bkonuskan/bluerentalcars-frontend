@@ -43,7 +43,7 @@ const Reservations = () => {
           </tr>
         )}
         {reservations.map((item, index) => (
-          <tr key={index} onClick={()=>showDetails(item.id)} style={{cursor:"pointer"}}>
+          <tr key={index} onClick={()=>showDetails(item.id)} className="cursor-hand">
             <td>{index + 1}</td>
             <td>{item.car.model}</td>
             <td>{item.pickUpLocation}<br/>{moment(item.pickUpTime).format("lll")}</td>
