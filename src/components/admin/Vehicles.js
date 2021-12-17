@@ -9,6 +9,7 @@ const Vehicles = () => {
   const [downloadingVehicles, setDownloadingVehicles] = useState(false);
   const [loadingVehicles, setLoadingVehicles] = useState(true);
   const [vehicles, setVehicles] = useState([]);
+  const navigate = useNavigate();
 
   const handleDownloadVehicles = () => {
     setDownloadingVehicles(true);
@@ -18,8 +19,8 @@ const Vehicles = () => {
     });
   };
 
-  const handleEditVehicle = () => {
-    
+  const handleEditVehicle = (vehicleId) => {
+    navigate(`/admin/vehicles/${vehicleId}`);
   }
 
 
@@ -65,7 +66,7 @@ const Vehicles = () => {
             </tr>
           ) : (
             vehicles.map((vehicle, index) => (
-              <tr key={index} onClick={() => handleEditVehicle(vehicle.id)}>
+              <tr key={index} onClick={() => handleEditVehicle(vehicle.id)} className="cursor-hand">
                 <td>{index + 1}</td>
                 <td>{vehicle.model}</td>
                 <td>{vehicle.transmission}</td>

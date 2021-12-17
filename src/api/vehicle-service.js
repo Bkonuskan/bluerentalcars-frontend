@@ -7,4 +7,8 @@ const getVehicles = () => {
   return axios.get(`${API_URL}car/visitors/all`);
 };
 
-export { getVehicles };
+const getVehicle = (vehicleId) => {
+  return axios.get(`${API_URL}car/visitors/${vehicleId}`);
+};
+
+export { getVehicles, getVehicle };
