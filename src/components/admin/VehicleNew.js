@@ -25,6 +25,7 @@ const VehicleNew = () => {
   const [imageSrc, setImageSrc] = useState("");
   const { dispatchVehicles } = useStore();
   const navigate = useNavigate();
+  const fileImageRef = useRef();
 
   const initialValues = {
     model: "",
@@ -55,7 +56,31 @@ const VehicleNew = () => {
   });
 
   const onSubmit = async (values) => {
-    
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", values.image);
+      const respUpload = await uploadVehicleImage(formData);
+      if(respUpload.status !== 200) throw("An error was occured while uploading image");
+
+      const imageId = respUpload.data.imageId;
+
+      delete values["image"];
+
+      const respVehicle = await createVehicle(values, imageId);
+      if(respVehicle.status!==201) throw ("An error was occured while creating vehicle");
+
+      setLoading(false);
+      toast("Vehicle created successfully"); 
+      navigate("/admin/vehicles");     
+
+
+    } catch (error) {
+      toast(error);
+      setLoading(false);
+    }
+
   };
 
   const formik = useFormik({
@@ -65,12 +90,21 @@ const VehicleNew = () => {
     onSubmit,
   });
 
+
+  const handleImageChange = () => {
+    const file = fileImageRef.current.files[0];
+    if(!file) return;
+
+    formik.setFieldValue("image", file);
+
+  }
   
+
   return (
-    <Form noValidate onSubmit={formik.handleSubmit}>
+    <Form noValidate onSubmit={formik.handleSubmit} >
       <Row>
         <Col lg={3} className="image-area">
-          
+          <Form.Control type="file" ref={fileImageRef} name="image" onChange={handleImageChange} />
         </Col>
 
         <Col lg={9}>
@@ -210,11 +244,7 @@ const VehicleNew = () => {
             )}{" "}
             Create
           </Button>
-          <Button
-            variant="secondary"
-            type="button"
-            variant="secondary"
-          >
+          <Button variant="secondary" type="button" variant="secondary">
             Cancel
           </Button>
         </ButtonGroup>

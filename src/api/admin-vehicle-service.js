@@ -3,7 +3,11 @@ import authHeader from "./auth-header";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-
+const createVehicle = (vehicle, imageId) => {
+  return axios.post(`${API_URL}car/admin/${imageId}/add`, vehicle, {
+    headers: authHeader(),
+  });
+};
 
 const downloadVehicles = () => {
   return axios.get(`${API_URL}excel/download/cars`, {
@@ -16,8 +20,13 @@ const downloadVehicles = () => {
   });
 };
 
+const uploadVehicleImage = (file) => {
+  return axios.post(`${API_URL}files/upload`, file, {
+    headers: {
+      ...authHeader(),
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
-
-
-
-export { downloadVehicles };
+export { downloadVehicles, uploadVehicleImage, createVehicle };
