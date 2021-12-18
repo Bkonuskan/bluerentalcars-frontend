@@ -1,23 +1,34 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Image, Table, ButtonGroup, Button, Spinner } from "react-bootstrap";
-import { BiMessageSquareEdit } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Table, ButtonGroup, Button, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { downloadReservations, getReservations } from "../../api/admin-reservation-service";
+import fileDownloader from "js-file-download";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
+  const navigate = useNavigate();
 
   const handleDownloadReservations = () => {
-    
-  }
+    setDownloading(true);
+    downloadReservations().then((resp) => {
+      fileDownloader(resp.data, "reservations.xlsx");
+      setDownloading(false);
+    });
+  };
 
-  const showDetails = () => {
-    
-  }
-  
-  
+  const showDetails = (reservationId) => {
+    navigate(`/admin/reservations/${reservationId}`);
+  };
+
+  useEffect(() => {
+    getReservations().then((resp) => {
+      setReservations(resp.data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
@@ -52,7 +63,7 @@ const Reservations = () => {
             </tr>
           )}
           {reservations.map((item, index) => (
-            <tr key={index} onClick={() => showDetails(item.id)}>
+            <tr key={index} onClick={() => showDetails(item.id)} className="cursor-hand">
               <td>{index + 1}</td>
               <td>{item.car.model}</td>
               <td>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AboutPage from "../pages/AboutPage";
+import ReservationEditPage from "../pages/admin/ReservationEditPage";
 import ReservationsPage from "../pages/admin/ReservationsPage";
 import UserEditPage from "../pages/admin/UserEditPage";
 import UsersNewPage from "../pages/admin/UsersNewPage";
@@ -32,7 +33,7 @@ const CustomRoutes = () => {
       <Route path="/admin/vehicles/:vehicleId" element={<PrivateRoute admin={true}><VehiclesEditPage/></PrivateRoute>}/>
 
       <Route path="/admin/reservations" element={<PrivateRoute admin={true}><ReservationsPage/></PrivateRoute>}/>
-
+      <Route path="/admin/reservations/:reservationId" element={<PrivateRoute admin={true}><ReservationEditPage/></PrivateRoute>}/>
 
       {/* CUSTOMER ROUTES */}
       <Route path="/reservations/:reservationId" element={<PrivateRoute><UserReservationDetailPage/></PrivateRoute>}/>

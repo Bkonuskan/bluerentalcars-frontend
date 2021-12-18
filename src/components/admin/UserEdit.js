@@ -243,7 +243,7 @@ const UserEdit = () => {
             variant="secondary"
             type="button"
             variant="secondary"
-            onClick={() => navigate("/admin/users")}
+            onClick={() => navigate(-1)}
           >
             Cancel
           </Button>
