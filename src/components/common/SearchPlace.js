@@ -9,7 +9,7 @@ const SEARCH_KEY = process.env.REACT_APP_ALGOLIA_SEARCH_KEY;
 const algoliaClient = algoliasearch(APP_ID, SEARCH_KEY);
 const algoliaSearch = algoliaClient.initIndex("usa-states");
 
-const SearchPlace = () => {
+const SearchPlace = (props) => {
   const [data, setData] = useState([]);
 
   const handleSearch = (e) => {
@@ -21,6 +21,7 @@ const SearchPlace = () => {
         setData(resp.hits);
       });
     }
+    props.onSearch(e);
   };
 
   return (
@@ -28,11 +29,11 @@ const SearchPlace = () => {
       <InputGroup className="mb-3">
         <InputGroup.Text style={{ flex: 1 }}>
           <FiMapPin />
-          &nbsp;Pick up
+          &nbsp;{props.title}
         </InputGroup.Text>
         <FormControl
+          {...props}
           type="search"
-          placeholder="Type a place"
           style={{ flex: 3 }}
           autoComplete="off"
           onChange={handleSearch}
@@ -40,7 +41,13 @@ const SearchPlace = () => {
       </InputGroup>
       <ul className={data.length <= 0 ? "d-none" : ""}>
         {data.map((item) => (
-          <li key={item.objectID}>
+          <li
+            key={item.objectID}
+            onClick={() =>{
+              props.onSelect(props.name, `${item.state} ${item.city}`);
+              setData([])
+            }}
+          >
             {item.state} {item.city}
           </li>
         ))}

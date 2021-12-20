@@ -1,5 +1,11 @@
-import React,{useState} from "react";
-import { Form, InputGroup, FormControl, Button, Spinner } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Form,
+  InputGroup,
+  FormControl,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import { FiCalendar, FiMapPin } from "react-icons/fi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -26,7 +32,7 @@ const SliderForm = () => {
     pickUpTime: "",
     dropOffDate: "",
     dropOffTime: "",
-    totalPrice:0
+    totalPrice: 0,
   };
 
   const validationSchema = Yup.object({
@@ -63,8 +69,10 @@ const SliderForm = () => {
       setLoading(false);
       const { isAvailable, totalPrice } = resp.data;
 
-      if(!isAvailable){
-        toast("The car is not avaliable in these days. Please select another one.");
+      if (!isAvailable) {
+        toast(
+          "The car is not avaliable in these days. Please select another one."
+        );
         return;
       }
 
@@ -73,10 +81,7 @@ const SliderForm = () => {
       dispatchReservation(setReservationState(values));
 
       setModalShow(true);
-
     });
-
-    
   };
 
   const formik = useFormik({
@@ -84,6 +89,16 @@ const SliderForm = () => {
     validationSchema,
     onSubmit,
   });
+
+  const handleSearch = (e) => {
+    const { name, value } = e.target;
+
+    formik.setFieldValue(name, value);
+  };
+
+  const handleSelect = (name, value) => {
+    formik.setFieldValue(name, value);
+  };
 
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
@@ -101,21 +116,25 @@ const SliderForm = () => {
         ))}
       </Form.Select>
 
-      <SearchPlace/>
+      <SearchPlace
+        placeholder="Select a place"
+        name="pickUpLocation"
+        title="Pick Up"
+        value={formik.values.pickUpLocation}
+        isInvalid={!!formik.errors.pickUpLocation}
+        onSearch={handleSearch}
+        onSelect={handleSelect}
+      />
 
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1" style={{ flex: 1 }}>
-          <FiMapPin />
-          &nbsp;Drop off
-        </InputGroup.Text>
-        <FormControl
-          placeholder="Type a place"
-          style={{ flex: 3 }}
-          {...formik.getFieldProps("dropOfLocation")}
-          isInvalid={!!formik.errors.dropOfLocation}
-          autoComplete="off"
-        />
-      </InputGroup>
+      <SearchPlace
+        placeholder="Select a place"
+        name="dropOfLocation"
+        title="Drop Off"
+        value={formik.values.dropOfLocation}
+        isInvalid={!!formik.errors.dropOfLocation}
+        onSearch={handleSearch}
+        onSelect={handleSelect}
+      />
 
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1" style={{ flex: 1 }}>
@@ -158,14 +177,15 @@ const SliderForm = () => {
       </InputGroup>
 
       <Button size="lg" className="w-100" type="submit" disabled={loading}>
-        {loading && <Spinner animation="border" size="sm"/> } CONTINUE RESERVATION
+        {loading && <Spinner animation="border" size="sm" />} CONTINUE
+        RESERVATION
       </Button>
 
       {modalShow && (
         <CompleteReservationModal
           show={modalShow}
           onHide={() => setModalShow(false)}
-          onReset={()=> formik.handleReset()}
+          onReset={() => formik.handleReset()}
         />
       )}
     </Form>
