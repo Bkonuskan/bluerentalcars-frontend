@@ -9,6 +9,7 @@ import { setReservationState } from "../../store/reservation/reservationActions"
 import { toast } from "react-toastify";
 import { isVehicleAvaliable } from "../../api/reservation-service";
 import moment from "moment";
+import SearchPlace from "../common/SearchPlace";
 
 const SliderForm = () => {
   const [loading, setLoading] = useState(false);
@@ -100,18 +101,7 @@ const SliderForm = () => {
         ))}
       </Form.Select>
 
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1" style={{ flex: 1 }}>
-          <FiMapPin />
-          &nbsp;Pick up
-        </InputGroup.Text>
-        <FormControl
-          placeholder="Type a place"
-          style={{ flex: 3 }}
-          {...formik.getFieldProps("pickUpLocation")}
-          isInvalid={!!formik.errors.pickUpLocation}
-        />
-      </InputGroup>
+      <SearchPlace/>
 
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1" style={{ flex: 1 }}>
@@ -123,6 +113,7 @@ const SliderForm = () => {
           style={{ flex: 3 }}
           {...formik.getFieldProps("dropOfLocation")}
           isInvalid={!!formik.errors.dropOfLocation}
+          autoComplete="off"
         />
       </InputGroup>
 
